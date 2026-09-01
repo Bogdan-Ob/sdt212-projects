@@ -21,7 +21,7 @@ def add_student(roster, student_id, name):
     """
     if student_id in roster:
         raise ValueError(f"student id already in use: {student_id}")
-    if not name:
+    if not name or not name.strip():
         raise ValueError("student name must not be empty")
     roster[student_id] = {"name": name, "scores": []}
     return roster[student_id]
