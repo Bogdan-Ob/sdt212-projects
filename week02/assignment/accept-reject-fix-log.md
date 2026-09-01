@@ -4,45 +4,35 @@
 **Date:** <YYYY-MM-DD>
 
 ## Issue
-- **Issue claimed:** <#number, title from the seeded repo>
-- **What the fix should change:** <one line>
-- **Existing test that confirms it:** <test name / file>
-- **Branch:** <branch name>
+- **Issue claimed:** 1 <#number, title from the seeded repo>
+- **What the fix should change:** Reject whitespace-only student names with ValueError in add_student <one line>
+- **Existing test that confirms it:** tests/test_students.py <test name / file>
+- **Branch:** week02-issue1 <branch name>
 
 ---
 
 ## Log entries (one per agent action)
 
 ### Action 1
-- **Agent action:** Ran pytest tests/test_students.py::test_add_student_rejects_whitespace_only_name -q to verify bug reproduction <what you asked the agent to do, and what it did>
-- **Files changed:** none <paths touched>
-- **Your explanation (teach-back):** Confirmin state of the method<what changed and why it works, in your own words>
-- **Evidence / test result:** <test name + pass/fail, or run output>
-- **Decision:** <accept | reject | fix>
-- **Follow-up prompt:** <the re-prompt you sent if you rejected or fixed, or "none">
+- **Agent action:** Ran `python -m pytest -q -k test_add_student_rejects_whitespace_only_name` to confirm bug failure
+- **Files changed:** none
+- **Your explanation (teach-back):** Confirmed initial failure state before making code edits
+- **Evidence / test result:** 1 failed, 20 deselected
+- **Decision:** accept
+- **Follow-up prompt:** none
 
 ### Action 2
-- **Agent action:** <...>
-- **Files changed:** <...>
-- **Your explanation (teach-back):** <...>
-- **Evidence / test result:** <...>
-- **Decision:** <accept | reject | fix>
-- **Follow-up prompt:** <...>
-
-### Action 3
-- **Agent action:** <...>
-- **Files changed:** <...>
-- **Your explanation (teach-back):** <...>
-- **Evidence / test result:** <...>
-- **Decision:** <accept | reject | fix>
-- **Follow-up prompt:** <...>
-
-> Add more entries as needed. At least one entry must carry a full teach-back (what changed, why it works, the passing-test/run evidence).
+- **Agent action:** Updated `add_student` in `gradebook/students.py` to validate `not name.strip()` and re-ran tests
+- **Files changed:** week02/assignment/mini-project/gradebook/students.py
+- **Your explanation (teach-back):** Replaced `if not name:` with `if not name or not name.strip():`. Method `.strip()` removes outer whitespace; whitespace-only strings evaluate to `""`, triggering `ValueError`
+- **Evidence / test result:** 1 passed, 20 deselected (full suite: 2 failed, 19 passed)
+- **Decision:** accept
+- **Follow-up prompt:** none
 
 ---
 
 ## Pull request
-- **Pull request URL:** <paste the URL>
+- **Pull request URL:** https://github.com/Bogdan-Ob/sdt212-projects/pull/1 <paste the URL>
 - **Visible status:** <open, unmerged, first body line says "Do not merge.">
 - **Existing test now passing:** <test name, confirmed pass>
 
